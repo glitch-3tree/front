@@ -4,6 +4,7 @@ import {
   EditProfilePage,
   IntroPage,
   NotFoundPage,
+  PolygonIDLoginPage,
   ProfilePage,
   ReceiveTokenPage,
   SendTokenPage,
@@ -44,6 +45,10 @@ function App() {
               <Routes>
                 <Route exact path="/" element={<IntroPage />} />
                 <Route path="/settings" element={<SettingPage />} />
+                <Route
+                  path="/polygonIDLogin"
+                  element={<PolygonIDLoginPage />}
+                />
                 <Route path="/components" element={<ComponentTestPage />} />
                 <Route path="/editProfile" element={<EditProfilePage />} />
                 <Route path="/sendToken" element={<SendTokenPage />} />

@@ -1,6 +1,7 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import { SocialGoogle } from "assets/icons";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { requestLogin } from "utils/api/auth";
@@ -53,6 +54,7 @@ const LoginModalInner = (type, setStatus, onClose) => {
   const setIsLoggedIn = useSetRecoilState(loginState);
   const setIsSignup = useSetRecoilState(signupState);
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const responseGoogle = async (code) => {
     await requestLogin(code).then((data) => {
@@ -92,6 +94,18 @@ const LoginModalInner = (type, setStatus, onClose) => {
         icon={SocialGoogle}
         className={"googleButton"}
         onClick={login}
+      />
+      <ContainedButton
+        type="secondary"
+        styles="outlined"
+        states="default"
+        size="large"
+        label="Polygon ID로 시작하기"
+        icon={SocialGoogle}
+        className={"googleButton"}
+        onClick={() => {
+          navigate("./polygonIDLogin");
+        }}
       />
       <TermsBox>
         {t("loginModal4")}
