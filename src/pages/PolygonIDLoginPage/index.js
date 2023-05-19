@@ -83,6 +83,12 @@ const PolygonIDLoginPage = () => {
 
   return (
     <FullContainer>
+      <IntroTextBox>
+        <FirstIntro>QR 코드로 로그인</FirstIntro>
+        <SecondIntro>
+          QR 코드를 스캔해 3TREE에 간편하게 로그인할 수 있어요
+        </SecondIntro>
+      </IntroTextBox>
       {jsonData && (
         <>
           <div style={{ textAlign: "center" }}>
