@@ -1,5 +1,9 @@
+import axios from "axios";
 import { ContainedButton } from "components/button";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { QRCode } from "react-qr-svg";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { COLORS as palette } from "utils/style/Color/colors";
 import Typography from "utils/style/Typography/index";
@@ -52,14 +56,15 @@ const ButtonContainer = styled.div`
 const PolygonIDLoginPage = () => {
   const [state, setState] = useState("inactive");
   const [jsonData, setJsonData] = useState(null);
-  const [qrBtnDisabled, setQrBtnDisabled] = useState(false);
+  const date = new Date();
+  const [key, setKey] = useState(date.getTime().toString(36));
+
+  const navigate = useNavigate();
 
   const base_url = "https://b7aa-14-52-100-2.ngrok-free.app/";
 
   useEffect(() => {
-    const date = new Date();
-    const key = date.getTime().toString(36);
-    fetch(base_url + `api/sign-in/${key}`, {
+    fetch(base_url + `/api/sign-in/${key}`, {
       headers: {
         "ngrok-skip-browser-warning": true,
       },
@@ -79,7 +84,18 @@ const PolygonIDLoginPage = () => {
 
   const { t } = useTranslation();
 
-  const completeOnClick = () => {};
+  //백엔드로 key와 함께 authenticate된 상태인지 확인하는 코드.
+  const completeOnClick = async (frontKey) => {
+    let resultValue = 0;
+    await axios
+      .get(`/public/polygon-id/did?frontKey=${frontKey}`)
+      .then((data) => {
+        resultValue = data.data.resultData;
+        console.log(data);
+        console.log("auth 성공함~!");
+        navigate("./");
+      });
+  };
 
   return (
     <FullContainer>
@@ -101,7 +117,7 @@ const PolygonIDLoginPage = () => {
         </>
       )}
       <ButtonContainer>
-        {state == "inactive" || state == "error" ? (
+        {state == "active" || state == "error" ? (
           <ContainedButton
             type="primary"
             styles="filled"
@@ -116,7 +132,7 @@ const PolygonIDLoginPage = () => {
             states="default"
             size="large"
             label="인증 완료"
-            onClick={completeOnClick}
+            onClick={() => completeOnClick(key)}
           />
         )}
       </ButtonContainer>
