@@ -24,6 +24,7 @@ const IconXContainer = styled.img`
   position: absolute;
   top: 32px;
   left: 20px;
+  cursor: pointer;
 `;
 
 const IntroTextBox = styled.div`
@@ -109,18 +110,18 @@ const PolygonIDLoginPage = () => {
   const [jsonData, setJsonData] = useState(null);
   const [completeState, setCompleteState] = useState("default");
   const date = new Date();
-  const key = date.getTime().toString(36);
+  const [frontKey, setFrontKey] = useState(date.getTime().toString(36));
 
   const navigate = useNavigate();
 
-  const base_url = "https://b7aa-14-52-100-2.ngrok-free.app/";
+  const base_url = "https://bc57-39-115-50-20.ngrok-free.app";
 
   useEffect(() => {
     getQRCode();
   }, []);
 
-  const getQRCode = () => {
-    fetch(base_url + `/api/sign-in/${key}`, {
+  const getQRCode = async () => {
+    await fetch(base_url + `/api/sign-in/${frontKey}`, {
       headers: {
         "ngrok-skip-browser-warning": true,
       },
@@ -148,9 +149,9 @@ const PolygonIDLoginPage = () => {
       .get(`/public/polygon-id/did?frontKey=${frontKey}`)
       .then((data) => {
         resultValue = data.data.resultData;
-        console.log(data);
         console.log("auth 성공함~!");
         setCompleteState("complete");
+        localStorage.setItem("frontKey", frontKey);
       })
       .catch(() => {
         setCompleteState("fail");
@@ -212,7 +213,7 @@ const PolygonIDLoginPage = () => {
               states="default"
               size="large"
               label="인증 완료"
-              onClick={() => completeOnClick(key)}
+              onClick={() => completeOnClick(frontKey)}
             />
           </ButtonContainer>
         </>
