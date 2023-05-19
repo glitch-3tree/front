@@ -1,5 +1,5 @@
 import { useGoogleLogin } from "@react-oauth/google";
-import { SocialGoogle } from "assets/icons";
+import { PolygonSmallIcon, SocialGoogle } from "assets/icons";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
@@ -40,7 +40,7 @@ const SecondIntro = styled.div`
 `;
 
 const TermsBox = styled.div`
-  margin-top: 64px;
+  margin-top: 31px;
   ${Typography.Caption2}
   color: ${palette.grey_5};
 
@@ -48,6 +48,33 @@ const TermsBox = styled.div`
     text-decoration: underline;
     color: ${palette.grey_5};
   }
+`;
+
+const PolygonLoginButton = styled.button`
+  min-width: 115px;
+  width: 100%;
+  height: 56px;
+  border-radius: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  margin-top: 12px;
+  background-color: #8a46ff;
+  border: 1px solid ${palette.grey_6};
+`;
+
+const IconContainer = styled.img`
+  width: 20px;
+  height: 20px;
+  margin: auto 0px;
+  margin-right: 6px;
+`;
+
+const SecondaryTextBox = styled.div`
+  ${Typograpy.Headline2}
+  font-size: 17px;
+  color: ${palette.white};
+  margin: auto 0px;
 `;
 
 const LoginModalInner = (type, setStatus, onClose) => {
@@ -95,18 +122,14 @@ const LoginModalInner = (type, setStatus, onClose) => {
         className={"googleButton"}
         onClick={login}
       />
-      <ContainedButton
-        type="secondary"
-        styles="outlined"
-        states="default"
-        size="large"
-        label="Polygon ID로 시작하기"
-        icon={SocialGoogle}
-        className={"googleButton"}
+      <PolygonLoginButton
         onClick={() => {
           navigate("./polygonIDLogin");
         }}
-      />
+      >
+        <IconContainer src={PolygonSmallIcon} />
+        <SecondaryTextBox>폴리곤 아이디로 시작하기</SecondaryTextBox>
+      </PolygonLoginButton>
       <TermsBox>
         {t("loginModal4")}
         <a href="https://3tree.io/privacyPolicy">{t("loginModal5")}</a>
