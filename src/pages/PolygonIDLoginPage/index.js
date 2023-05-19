@@ -13,30 +13,26 @@ const FullContainer = styled.div`
   min-height: 100vh;
   position: relative;
   padding-top: 70px;
+  background-color: ${palette.black};
 `;
 
 const IntroTextBox = styled.div`
-  width: 90%;
-  margin: 0px auto;
-`;
-
-const InputContainer = styled.div`
-  width: 90%;
-  margin: 0px auto;
-  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: ${palette.white};
 `;
 
 const FirstIntro = styled.div`
   ${Typography.Headline1}
-  color: ${palette.Black};
   line-height: 33.35px;
 `;
 
 const SecondIntro = styled.div`
   ${Typography.Body}
-  color: ${palette.grey_2};
   line-height: 23.8px;
   margin-top: 14px;
+  text-align: center;
 `;
 
 const ButtonContainer = styled.div`
@@ -49,6 +45,27 @@ const ButtonContainer = styled.div`
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(1, 1fr);
+`;
+
+const QRCodeContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 280px;
+  height: 280px;
+  margin: 56px auto 0 auto;
+  background: linear-gradient(180deg, #4880ee 1.06%, #8a46ff 100%);
+  border-radius: 36px;
+`;
+
+const QRCodeSubContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 248px;
+  height: 248px;
+  background-color: white;
+  border-radius: 24px;
 `;
 
 // state = ["inactive", "filled", "typing", "verified", "error", "help"]
@@ -100,21 +117,22 @@ const PolygonIDLoginPage = () => {
   return (
     <FullContainer>
       <IntroTextBox>
-        <FirstIntro>QR 코드로 로그인</FirstIntro>
+        <FirstIntro>QR 코드로 인증하기</FirstIntro>
         <SecondIntro>
-          QR 코드를 스캔해 3TREE에 간편하게 로그인할 수 있어요
+          QR코드를 스캔하면 폴리곤 아이디로
+          <br /> 3TREE에 간편하게 로그인 할 수 있어요
         </SecondIntro>
       </IntroTextBox>
       {jsonData && (
-        <>
-          <div style={{ textAlign: "center" }}>
+        <QRCodeContainer>
+          <QRCodeSubContainer>
             <QRCode
               level="Q"
-              style={{ width: 256 }}
+              style={{ width: 200 }}
               value={JSON.stringify(jsonData)}
             />
-          </div>
-        </>
+          </QRCodeSubContainer>
+        </QRCodeContainer>
       )}
       <ButtonContainer>
         {state == "active" || state == "error" ? (

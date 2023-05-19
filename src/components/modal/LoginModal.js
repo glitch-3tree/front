@@ -71,7 +71,7 @@ const IconContainer = styled.img`
 `;
 
 const SecondaryTextBox = styled.div`
-  ${Typograpy.Headline2}
+  ${Typography.Headline2}
   font-size: 17px;
   color: ${palette.white};
   margin: auto 0px;
