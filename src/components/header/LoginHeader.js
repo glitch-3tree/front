@@ -106,6 +106,15 @@ const LoginHeader = () => {
     if (!localStorage.getItem("accessToken")) {
       setIsLoggedIn(false);
     }
+    const frontKey = localStorage.getItem("frontKey");
+    if (frontKey) {
+      setIsLoggedIn(true);
+      let returnValue;
+      axios.get(`/public/polygon-id/did?frontKey=${frontKey}`).then((data) => {
+        returnValue = data.data.resultData;
+        setUserInfo(returnValue);
+      });
+    }
   }, []);
 
   return (
