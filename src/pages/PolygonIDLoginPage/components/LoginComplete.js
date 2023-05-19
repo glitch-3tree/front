@@ -12,6 +12,7 @@ const IconXContainer = styled.img`
   position: absolute;
   top: 32px;
   left: 20px;
+  cursor: pointer;
 `;
 
 const IntroTextBox = styled.div`
@@ -65,11 +66,11 @@ const PolygonIDLoginPage = () => {
         <Lottie animationData={polygonidComplete} play />
       </LottieContainer>
       <IntroTextBox>
-        <FirstIntro>폴리곤 ID 인증 성공!</FirstIntro>
+        <FirstIntro>Polygon ID verification successful!</FirstIntro>
         <SecondIntro>
-          이제 3TREE에서 내 프로필 관리하고
+          Now you can send money through your social accounts
           <br />
-          소셜 송금할 수 있어요
+          and manage your profile on 3TREE.
         </SecondIntro>
       </IntroTextBox>
       <ButtonContainer>
@@ -79,7 +80,7 @@ const PolygonIDLoginPage = () => {
           style={{ backgroundColor: "#8a46ff" }}
           states="default"
           size="large"
-          label="닫기"
+          label="Close"
           onClick={() => (window.location.href = "/")}
         />
       </ButtonContainer>

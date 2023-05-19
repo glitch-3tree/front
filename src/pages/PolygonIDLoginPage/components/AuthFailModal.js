@@ -50,8 +50,8 @@ const UnvalidFormatModal = ({ visible, onClickEvent }) => {
         <ModalWrapper onClick={onClickEvent}>
           <ModalItems>
             <ModalInfoText>
-              <p>인증에 실패했어요!</p>
-              <p>다시 한번 QR코드 인증을 시도해주세요</p>
+              <p>Verification failed!</p>
+              <p>Please try to verify the QR code again</p>
             </ModalInfoText>
           </ModalItems>
         </ModalWrapper>

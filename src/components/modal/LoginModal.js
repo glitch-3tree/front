@@ -128,7 +128,7 @@ const LoginModalInner = (type, setStatus, onClose) => {
         }}
       >
         <IconContainer src={PolygonSmallIcon} />
-        <SecondaryTextBox>폴리곤 아이디로 시작하기</SecondaryTextBox>
+        <SecondaryTextBox>{t("polygonLogin4")}</SecondaryTextBox>
       </PolygonLoginButton>
       <TermsBox>
         {t("loginModal4")}

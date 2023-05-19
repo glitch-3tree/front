@@ -268,5 +268,20 @@
   "sessionError": "Your session has expired. Please sign in again.",
 
   "unvalidFormatModal1": "File format not supported",
-  "unvalidFormatModal2": "Please upload files in JPG, PNG, or GIF format."
+  "unvalidFormatModal2": "Please upload files in JPG, PNG, or GIF format.",
+
+  "polygonLogin1": "Start 3tree",
+  "polygonLogin2": "Create Your Profile Page and Extend Your Digital Identity",
+  "polygonLogin3": "Continue with Google",
+  "polygonLogin4": "Continue with Polygon ID",
+  "polygonLogin5": "By signing in, you agree to our Privacy Policy and Terms of Service, and we collect your email, name and profile image for use.",
+  "polygonLogin6": "Verify with a QR code",
+  "polygonLogin7": "Scan the QR code to easily log in to 3TREE with your Polygon ID",
+  "polygonLogin8": "If you get an error, try refreshing and verifying again",
+  "polygonLogin9": "Verification failed!",
+  "polygonLogin10": "Please try to verify the QR code again",
+  "polygonLogin11": "Verified",
+  "polygonLogin12": "Polygon ID verification successful!",
+  "polygonLogin13": "Now you can send money through your social accounts and manage your profile on 3TREE.",
+  "polygonLogin14": "Close"
 }

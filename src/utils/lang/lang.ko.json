@@ -268,5 +268,20 @@
   "sessionError": "세션이 만료되었습니다. 다시 로그인해주세요.",
 
   "unvalidFormatModal1": "지원하지 않는 형식이에요.",
-  "unvalidFormatModal2": "JPG, PNG, GIF 형식의 파일을 업로드 해주세요."
+  "unvalidFormatModal2": "JPG, PNG, GIF 형식의 파일을 업로드 해주세요.",
+
+  "polygonLogin1": "3TREE 시작하기",
+  "polygonLogin2": "나만의 페이지를 생성하고 디지털 아이덴티티를 확장해보세요",
+  "polygonLogin3": "구글로 시작하기",
+  "polygonLogin4": "폴리곤 아이디로 시작하기",
+  "polygonLogin5": "로그인은 개인정보 보호 정책 및 서비스 약관에 동의하는 것을 의미하며, 이용을 위해 이메일과 이름, 프로필 이미지를 수집합니다.",
+  "polygonLogin6": "QR 코드로 인증하기",
+  "polygonLogin7": "QR코드를 스캔하면 폴리곤 아이디로 3TREE에 간편하게 로그인 할 수 있어요",
+  "polygonLogin8": "인증 할 때 오류가 생긴다면 새로 고침 버튼을 누른 후 다시 인증 해보세요",
+  "polygonLogin9": "인증에 실패했어요!",
+  "polygonLogin10": "다시 한번 QR코드 인증을 시도해주세요",
+  "polygonLogin11": "인증완료",
+  "polygonLogin12": "폴리곤 아이디 인증 성공!",
+  "polygonLogin13": "이제 3TREE에서 내 프로필 관리하고 소셜 송금 할 수 있어요",
+  "polygonLogin14": "닫기"
 }

@@ -114,7 +114,7 @@ const PolygonIDLoginPage = () => {
 
   const navigate = useNavigate();
 
-  const base_url = "https://bc57-39-115-50-20.ngrok-free.app";
+  const base_url = "https://4cae-14-52-100-2.ngrok-free.app";
 
   useEffect(() => {
     getQRCode();
@@ -174,10 +174,10 @@ const PolygonIDLoginPage = () => {
             }}
           />
           <IntroTextBox>
-            <FirstIntro>QR 코드로 인증하기</FirstIntro>
+            <FirstIntro>{t("polygonLogin6")}</FirstIntro>
             <SecondIntro>
-              QR코드를 스캔하면 폴리곤 아이디로
-              <br /> 3TREE에 간편하게 로그인 할 수 있어요
+              Scan the QR code to
+              <br /> easily log in to 3TREE with your Polygon ID
             </SecondIntro>
           </IntroTextBox>
           <QRCodeContainer>
@@ -191,9 +191,9 @@ const PolygonIDLoginPage = () => {
           </QRCodeContainer>
           <RefreshButtonContainer>
             <RefreshText>
-              인증 할 때 오류가 생긴다면
+              If you get an error,
               <br />
-              새로 고침 버튼을 누른 후 다시 인증 해보세요
+              try refreshing and verifying again
             </RefreshText>
             <RefreshButton onClick={getQRCode}>
               <IconContainer src={ArrowRefreshIcon} />
@@ -212,7 +212,7 @@ const PolygonIDLoginPage = () => {
               style={{ backgroundColor: "#8a46ff" }}
               states="default"
               size="large"
-              label="인증 완료"
+              label="Verified"
               onClick={() => completeOnClick(frontKey)}
             />
           </ButtonContainer>
