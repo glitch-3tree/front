@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { COLORS as palette } from "utils/style/Color/colors";
 import Typography from "utils/style/Typography/index";
-import { LoginComplete } from "./components";
+import { AuthFailModal, LoginComplete } from "./components";
 
 const FullContainer = styled.div`
   width: 100%;
@@ -107,7 +107,7 @@ const IconContainer = styled.img`
 
 const PolygonIDLoginPage = () => {
   const [jsonData, setJsonData] = useState(null);
-  const [completeState, setCompleteState] = useState("complete");
+  const [completeState, setCompleteState] = useState("default");
   const date = new Date();
   const key = date.getTime().toString(36);
 
@@ -151,6 +151,12 @@ const PolygonIDLoginPage = () => {
         console.log(data);
         console.log("auth 성공함~!");
         setCompleteState("complete");
+      })
+      .catch(() => {
+        setCompleteState("fail");
+        setTimeout(() => {
+          setCompleteState("default");
+        }, 4000);
       });
   };
 
@@ -192,6 +198,12 @@ const PolygonIDLoginPage = () => {
               <IconContainer src={ArrowRefreshIcon} />
             </RefreshButton>
           </RefreshButtonContainer>
+          <AuthFailModal
+            visible={completeState === "fail"}
+            onClickEvent={() => {
+              setCompleteState("default");
+            }}
+          />
           <ButtonContainer>
             <ContainedButton
               type="primary"
