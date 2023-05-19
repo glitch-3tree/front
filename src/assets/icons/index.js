@@ -1,4 +1,5 @@
 export { default as Sender3TreeIcon } from "./3tree-icon.svg";
+export { default as ArrowRefreshIcon } from "./arrow-refresh-icon.svg";
 export { default as BlingIcon } from "./bling-icon.svg";
 export { default as BottomModalX } from "./bottom-modal-x.svg";
 export { default as CameraIcon } from "./camera-icon.svg";
@@ -37,3 +38,4 @@ export { default as SocialGoogle } from "./social-google.svg";
 export { default as TooltipBubbleTailGray } from "./tooltip-bubbleTail-gray.svg";
 export { default as TooltipBubbleTailGrayDown } from "./tooltip-bubbleTail-grayDown.svg";
 export { default as TooltipBubbleTail } from "./tooltip-bubbleTail.svg";
+export { default as IconX } from "./x-icon.svg";

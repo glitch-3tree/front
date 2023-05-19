@@ -1,3 +1,4 @@
+import { ArrowRefreshIcon, IconX } from "assets/icons";
 import axios from "axios";
 import { ContainedButton } from "components/button";
 import { useEffect, useState } from "react";
@@ -14,6 +15,14 @@ const FullContainer = styled.div`
   position: relative;
   padding-top: 70px;
   background-color: ${palette.black};
+`;
+
+const IconXContainer = styled.img`
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 32px;
+  left: 20px;
 `;
 
 const IntroTextBox = styled.div`
@@ -39,9 +48,7 @@ const ButtonContainer = styled.div`
   width: 100%;
   padding: 30px 20px;
   position: absolute;
-  top: 460px;
-  padding-bottom: 160px;
-  bottom: 136px;
+  bottom: 16px;
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(1, 1fr);
@@ -68,19 +75,46 @@ const QRCodeSubContainer = styled.div`
   border-radius: 24px;
 `;
 
+const RefreshButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 48px;
+`;
+
+const RefreshText = styled.div`
+  ${Typography.Caption3};
+  color: ${palette.grey_4};
+  text-align: center;
+`;
+
+const RefreshButton = styled.div`
+  width: 40px;
+  height: 40px;
+  background-color: ${palette.grey_1};
+  border-radius: 16px;
+  margin-top: 12px;
+`;
+
+const IconContainer = styled.img`
+  width: 20px;
+  height: 20px;
+  margin: 10px;
+`;
+
 // state = ["inactive", "filled", "typing", "verified", "error", "help"]
 
 const PolygonIDLoginPage = () => {
   const [state, setState] = useState("inactive");
   const [jsonData, setJsonData] = useState(null);
   const date = new Date();
-  const [key, setKey] = useState(date.getTime().toString(36));
+  const key = date.getTime().toString(36);
 
   const navigate = useNavigate();
 
   const base_url = "https://b7aa-14-52-100-2.ngrok-free.app/";
 
-  useEffect(() => {
+  const getQRCode = () => {
     fetch(base_url + `/api/sign-in/${key}`, {
       headers: {
         "ngrok-skip-browser-warning": true,
@@ -93,10 +127,11 @@ const PolygonIDLoginPage = () => {
         console.log(data);
         setJsonData(data);
         return id;
-      })
-      .catch((err) => {
-        console.log(err);
       });
+  };
+
+  useEffect(() => {
+    getQRCode();
   }, []);
 
   const { t } = useTranslation();
@@ -116,6 +151,7 @@ const PolygonIDLoginPage = () => {
 
   return (
     <FullContainer>
+      <IconXContainer src={IconX} />
       <IntroTextBox>
         <FirstIntro>QR 코드로 인증하기</FirstIntro>
         <SecondIntro>
@@ -123,36 +159,35 @@ const PolygonIDLoginPage = () => {
           <br /> 3TREE에 간편하게 로그인 할 수 있어요
         </SecondIntro>
       </IntroTextBox>
-      {jsonData && (
-        <QRCodeContainer>
-          <QRCodeSubContainer>
-            <QRCode
-              level="Q"
-              style={{ width: 200 }}
-              value={JSON.stringify(jsonData)}
-            />
-          </QRCodeSubContainer>
-        </QRCodeContainer>
-      )}
+      <QRCodeContainer>
+        <QRCodeSubContainer>
+          <QRCode
+            level="Q"
+            style={{ width: 200 }}
+            value={JSON.stringify(jsonData)}
+          />
+        </QRCodeSubContainer>
+      </QRCodeContainer>
+      <RefreshButtonContainer>
+        <RefreshText>
+          인증 할 때 오류가 생긴다면
+          <br />
+          새로 고침 버튼을 누른 후 다시 인증 해보세요
+        </RefreshText>
+        <RefreshButton onClick={getQRCode}>
+          <IconContainer src={ArrowRefreshIcon} />
+        </RefreshButton>
+      </RefreshButtonContainer>
       <ButtonContainer>
-        {state == "active" || state == "error" ? (
-          <ContainedButton
-            type="primary"
-            styles="filled"
-            states="disabled"
-            size="large"
-            label="인증 완료"
-          />
-        ) : (
-          <ContainedButton
-            type="primary"
-            styles="filled"
-            states="default"
-            size="large"
-            label="인증 완료"
-            onClick={() => completeOnClick(key)}
-          />
-        )}
+        <ContainedButton
+          type="primary"
+          styles="filled"
+          style={{ backgroundColor: "#8a46ff" }}
+          states="default"
+          size="large"
+          label="인증 완료"
+          onClick={() => completeOnClick(key)}
+        />
       </ButtonContainer>
     </FullContainer>
   );
