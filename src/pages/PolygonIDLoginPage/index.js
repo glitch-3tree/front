@@ -1,9 +1,6 @@
-import axios from "axios";
 import { ContainedButton } from "components/button";
 import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { checkUserId } from "utils/api/auth";
 import { COLORS as palette } from "utils/style/Color/colors";
 import Typography from "utils/style/Typography/index";
 
@@ -53,59 +50,50 @@ const ButtonContainer = styled.div`
 // state = ["inactive", "filled", "typing", "verified", "error", "help"]
 
 const PolygonIDLoginPage = () => {
-  const [linkId, setLinkId] = useState("");
   const [state, setState] = useState("inactive");
-  const [createSuccess, setCreateSuccess] = useState(false);
-  const [errorComment, setErrorComment] = useState("");
-  const { t } = useTranslation();
+  const [jsonData, setJsonData] = useState(null);
+  const [qrBtnDisabled, setQrBtnDisabled] = useState(false);
+
+  const base_url = "https://b7aa-14-52-100-2.ngrok-free.app/";
 
   useEffect(() => {
-    linkId.length > 0 ? setState("typing") : setState("inactive");
-
-    let regExp = /^[a-zA-Z0-9_]+[a-zA-Z0-9_]{4,18}$/g;
-    let testResult = regExp.test(linkId);
-
-    if ((linkId.length <= 4 || linkId.length >= 20) && linkId) {
-      setState("error");
-      setErrorComment(t("createLink6"));
-    } else if (!testResult && linkId) {
-      setState("error");
-      setErrorComment(t("createLink5"));
-    } else {
-      setErrorComment("");
-    }
-  }, [linkId]);
-
-  const completeOnClick = () => {
-    checkUserId(linkId)
-      .then(async () => {
-        await axios
-          .put(
-            `/users/edit/userid?new_id=${linkId}`,
-            {},
-            {
-              headers: {
-                Authorization: "Bearer " + localStorage.getItem("accessToken"),
-              },
-            }
-          )
-          .then(() => {
-            setCreateSuccess(true);
-          })
-          .catch((e) => {
-            console.log(e);
-          });
+    const date = new Date();
+    const key = date.getTime().toString(36);
+    fetch(base_url + `api/sign-in/${key}`, {
+      headers: {
+        "ngrok-skip-browser-warning": true,
+      },
+    })
+      .then((r) =>
+        Promise.all([Promise.resolve(r.headers.get("x-id")), r.json()])
+      )
+      .then(([id, data]) => {
+        console.log(data);
+        setJsonData(data);
+        return id;
       })
-      .catch(() => {
-        setState("error");
-        setErrorComment(
-          `${t("createLink7")} "${linkId}" ${t("createLink7_2")}`
-        );
+      .catch((err) => {
+        console.log(err);
       });
-  };
+  }, []);
+
+  const { t } = useTranslation();
+
+  const completeOnClick = () => {};
 
   return (
     <FullContainer>
+      {jsonData && (
+        <>
+          <div style={{ textAlign: "center" }}>
+            <QRCode
+              level="Q"
+              style={{ width: 256 }}
+              value={JSON.stringify(jsonData)}
+            />
+          </div>
+        </>
+      )}
       <ButtonContainer>
         {state == "inactive" || state == "error" ? (
           <ContainedButton
